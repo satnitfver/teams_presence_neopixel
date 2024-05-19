@@ -4,11 +4,11 @@ This project changes the color of a NeoPixel Ring based on your Microsoft Teams 
 
 ## Components
 
-- Raspberry Pi Pico W
-- NeoPixel Ring
-- Node-RED
-- MQTT Broker
-- PresenceLight
+- [Raspberry Pi Pico W](https://www.raspberrypi.org/products/raspberry-pi-pico/)
+- [NeoPixel Ring](https://www.adafruit.com/category/168)
+- [Node-RED](https://nodered.org/)
+- [MQTT Broker](https://mqtt.org/)
+- [PresenceLight](https://github.com/isaacrlevin/PresenceLight)
 
 ## Files and Images
 
