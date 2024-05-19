@@ -1,6 +1,6 @@
 # Teams Status Color Indicator
 
-This project changes the color of a NeoPixel Ring based on your Microsoft Teams status. It uses a Raspberry Pi Pico W, NeoPixel Ring, Node-RED, and MQTT for communication. The status information is fetched from the PresenceLight Custom API.
+This project changes the color of a NeoPixel Ring based on your Microsoft Teams status. It uses a Raspberry Pi Pico W, NeoPixel Ring, Node-RED, and MQTT for communication. The status information is fetched from the PresenceLight using API.
 
 ## Components
 
@@ -27,9 +27,16 @@ This project changes the color of a NeoPixel Ring based on your Microsoft Teams 
 
 ## Setup
 
-### Raspberry Pi Pico W
+### Raspberry Pi Pico W, Node-Red, MQTT, PresenceLight
 
 1. Install MicroPython on your Raspberry Pi Pico W.
 2. Copy the `main.py` file to your Pico W.
+3. Install PresenceLight from Windows store, authenticate
+4. Node-Red, create HTTP In, setting /teams
+5. Node-Red, create function block to get status
+6. PresenceLight, use API to point to the Node-Red HTTP in
+7. Node-Red, MQTT to send status to internal Broker
+
+
 
 
