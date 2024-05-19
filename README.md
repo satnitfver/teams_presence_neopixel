@@ -8,7 +8,7 @@ This project changes the color of a NeoPixel Ring based on your Microsoft Teams 
 - NeoPixel Ring
 - Node-RED
 - MQTT Broker
-- PresenceLight Custom API
+- PresenceLight
 
 ## Files and Images
 
