@@ -1,0 +1,6 @@
+#HAS this way I can create automation to conrol lights outside the PresenceLight defaults
+mqtt:
+  sensor:
+    - name: "teams_stats"
+      unique_name: "Teams_status"
+      state_topic: "teams/status/"  #mqtt broker
