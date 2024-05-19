@@ -1,7 +1,7 @@
 import network
 import socket
 import time
-import secrets
+import secrets #py file containing you wifi ssid and ssidpw
 from neopixel import Neopixel
 from machine import Pin
 from umqtt.simple import MQTTClient
