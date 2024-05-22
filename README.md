@@ -27,15 +27,38 @@ This project changes the color of a NeoPixel Ring based on your Microsoft Teams 
 
 ## Setup
 
-### Raspberry Pi Pico W, Node-Red, MQTT, PresenceLight
+# Raspberry Pi Pico W, Node-Red, MQTT, PresenceLight
+
+![Raspberry Pi Pico W](neo.png)
 
 1. Install MicroPython on your Raspberry Pi Pico W.
-2. Copy the `main.py` file to your Pico W.
+2. Copy the `main.py` file to your Pico W. Install NeoPixel library.
 3. Install PresenceLight from Windows store, authenticate
-4. Node-Red, create HTTP In, setting /teams
+4. Node-Red, create HTTP In, setting /teams: should be able to GET http://localhost:1880(YOUR NODE_RED IP:PORT)/teams?status=active
+
+![Node-Red HTTP In](node1.png)
+
 5. Node-Red, create function block to get status
-6. PresenceLight, use API to point to the Node-Red HTTP in
-7. Node-Red, MQTT to send status to internal Broker
+
+![Node-Red Function Block](node2.png)
+
+6. Connect to MQTT out (setting to your MQTT broker)
+   
+![MQTT](mqtt.png)
+  
+7. PresenceLight, use API to point to the Node-Red HTTP in
+
+![PresenceLight API](pres.png)
+
+8. Node-Red, MQTT to send status to internal Broker
+
+![MQTT Explorer](mqtt%20explorer.png)
+
+
+9. 3D print case for Pico and Neopixel
+
+![Pico w with light](light.png)
+
 
 
 
