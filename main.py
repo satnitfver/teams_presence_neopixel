@@ -1,9 +1,9 @@
 import network
 import socket
 import time
-import secrets #py file containing you wifi ssid and ssidpw
+import secrets
 from neopixel import Neopixel
-from machine import Pin
+from machine import Pin, reset, WDT
 from umqtt.simple import MQTTClient
 
 numpix = 12
@@ -13,15 +13,18 @@ red = (255, 0, 0)
 yellow = (255, 255, 0)
 green = (0, 255, 0)
 black = (0, 0, 0)
-colors = {"busy": red, "away": yellow, "active": green, "offline": black}
+colors = {"busy": red, "away": yellow, "active": green, "offline": black} #match sts sent from PresenceLight API: ex:"BUSY" http://mqttbroker.local:1880/teams?status=busy
 
 # MQTT settings
-mqtt_broker = "10.0.0.0"
+mqtt_broker = "10.x.x.x" #your broker IP
 mqtt_port = 1883
 mqtt_topic = b"teams/status/"
 mqtt_client_id = "teams_status"
-#mqtt_username = "your_username"
-#mqtt_password = "your_password"
+# mqtt_username = "your_username" #uncomment if you have user/pass
+# mqtt_password = "your_password"
+
+# Watchdog timer setup
+wdt = WDT(timeout=8000)  # Set timeout to 8 seconds
 
 def on_message(topic, message):
     status = message.decode()
@@ -60,18 +63,19 @@ def mqtt_loop():
     while True:
         try:
             client.check_msg()  # Check for MQTT messages
+            wdt.feed()  # Reset the watchdog timer
         except Exception as e:
             print("Error:", e)
             print("Reconnecting to MQTT broker...")
-            connect_mqtt()  # Attempt to reconnect
+            connect_mqtt()  # Attempt to reconnect if failed to connect
         time.sleep(1)
 
-connect_wifi()   
-connect_mqtt()
-
-try:        
-    mqtt_loop()  # Start MQTT loop
-except Exception as e:
-    print("Error:", e)
-
-
+while True:
+    try:
+        connect_wifi()
+        connect_mqtt()
+        mqtt_loop()  # Start MQTT loop
+    except Exception as e:
+        print("Error:", e)
+        print("Resetting the system...")
+        reset()  # Reset the system on error, this will loop if network drops, test without
